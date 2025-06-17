@@ -38,15 +38,18 @@ private class NO {
                 }else {
                     if (p.dir == null){
                         return p.esq;
-                }else{
-                        NO aux, ref;
-                        ref = p.dir;
-                        aux = p.dir;
-                        while (aux.esq != null)
-                            aux = aux.esq;
-                        aux.esq = p.esq;
-                        return ref;
-                    }
+                } else {
+    // Encontra o nó sucessor (menor valor na subárvore direita)
+                NO sucessor = p.dir;
+                while (sucessor.esq != null) {
+                    sucessor = sucessor.esq;
+                }
+                // Copia o valor do sucessor para o nó atual
+                p.dado = sucessor.dado;
+                // Remove o nó sucessor da subárvore direita
+                p.dir = remover(p.dir, sucessor.dado);
+                // Retorna o nó com o valor atualizado
+                return p;    
                 }
                 } else { // procura dado a ser removido na ABB
                     if (info < p.dado)
